@@ -1,4 +1,4 @@
-package com.hmall.utils;
+package com.hmall.gateway.util;
 
 import cn.hutool.core.exceptions.ValidateException;
 import cn.hutool.jwt.JWT;
@@ -23,7 +23,7 @@ public class JwtTool {
     /**
      * 创建 access-token
      *
-     * @param userDTO 用户信息
+     * @param userId 用户信息
      * @return access-token
      */
     public String createToken(Long userId, Duration ttl) {

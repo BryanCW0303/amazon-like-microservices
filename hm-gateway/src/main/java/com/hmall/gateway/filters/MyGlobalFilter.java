@@ -13,7 +13,7 @@ public class MyGlobalFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        
+
         ServerHttpRequest request = exchange.getRequest();
         HttpHeaders headers = request.getHeaders();
         System.out.println("headers = " + headers);
