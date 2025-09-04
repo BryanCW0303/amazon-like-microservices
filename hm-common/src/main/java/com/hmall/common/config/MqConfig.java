@@ -19,7 +19,9 @@ public class MqConfig {
 
     @Bean
     public Jackson2JsonMessageConverter messageConverter(){
-        return new Jackson2JsonMessageConverter();
+        Jackson2JsonMessageConverter jjmc = new Jackson2JsonMessageConverter();
+        jjmc.setCreateMessageIds(true);
+        return jjmc;
     }
 
     @PostConstruct
