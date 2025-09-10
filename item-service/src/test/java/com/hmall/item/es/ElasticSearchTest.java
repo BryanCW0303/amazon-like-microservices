@@ -12,13 +12,17 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.List;
 
 @SpringBootTest(properties = "spring.profiles.active=local")
 public class ElasticSearchTest {
@@ -69,6 +73,14 @@ public class ElasticSearchTest {
         );
 
         SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        Aggregations aggregations = response.getAggregations();
+        Terms brandTerms = aggregations.get(brandAggName);
+        List<? extends Terms.Bucket> buckets = brandTerms.getBuckets();
+        for (Terms.Bucket bucket : buckets) {
+            System.out.println("brand:" + bucket.getKeyAsString());
+            System.out.println("brand:" + bucket.getDocCount());
+        }
     }
 
     @BeforeEach
