@@ -11,15 +11,13 @@ import com.hmall.cart.domain.po.Cart;
 import com.hmall.cart.domain.vo.CartVO;
 import com.hmall.cart.mapper.CartMapper;
 import com.hmall.cart.service.ICartService;
+import com.hmall.common.exception.BadRequestException;
 import com.hmall.common.exception.BizIllegalException;
 import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.CollUtils;
 import com.hmall.common.utils.UserContext;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +37,13 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
+    // 2.xx
+    // RequiredArgsConstructor不使用全参构造防止常量，给加final的成员变量注入（反之），加final修饰优化自动注入
+    // private final RestTemplate restTemplate;
+    // private final IItemService itemService;
+    // private final DiscoveryClient discoveryClient;
 
+    // 使用FeignClient简化
     private final ItemClient itemClient;
 
     private final CartProperties cartProperties;
@@ -50,7 +54,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         Long userId = UserContext.getUser();
 
         // 2.判断是否已经存在
-        if(checkItemExists(cartFormDTO.getItemId(), userId)){
+        if (checkItemExists(cartFormDTO.getItemId(), userId)) {
             // 2.1.存在，则更新数量
             baseMapper.updateNum(cartFormDTO.getItemId(), userId);
             return;
@@ -74,13 +78,10 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         if (CollUtils.isEmpty(carts)) {
             return CollUtils.emptyList();
         }
-
         // 2.转换VO
         List<CartVO> vos = BeanUtils.copyList(carts, CartVO.class);
-
         // 3.处理VO中的商品信息
         handleCartItems(vos);
-
         // 4.返回
         return vos;
     }
@@ -88,11 +89,35 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     private void handleCartItems(List<CartVO> vos) {
         // 1.获取商品id
         Set<Long> itemIds = vos.stream().map(CartVO::getItemId).collect(Collectors.toSet());
-        // 2.查询商品
-        List<ItemDTO> items = itemClient.queryItemByIds(itemIds);
-
-        if (CollUtils.isEmpty(items)) {
+/*        // 2.查询商品
+        //List<ItemDTO> items = itemService.queryItemByIds(itemIds);
+        // 2.1.利用RestTemplate发起http请求，得到http的响应
+        // 2.11.发现item-service服务的实例列表
+        List<ServiceInstance> instances = discoveryClient.getInstances("item-service");
+        if (CollUtils.isEmpty(instances)) {
             return;
+        }
+        // 2.22.负载均衡，挑选一个实例列表
+        ServiceInstance instance = instances.get(RandomUtil.randomInt(instances.size()));
+        // 2.33.发送请求，查询请求
+        ResponseEntity<List<ItemDTO>> response = restTemplate.exchange(
+                instance.getUri()+"/items?ids={ids}",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ItemDTO>>() {
+                },
+                Map.of("ids", CollUtil.join(itemIds, ","))
+        );
+        // 2.2.解析响应
+        if(!response.getStatusCode().is2xxSuccessful()){
+            // 查询失败，直接结束
+            return;
+        }
+        List<ItemDTO> items = response.getBody();*/
+        //利用feign优化以上代码，feign替我们完成了服务拉取、负载均衡、发送http请求的所有工作，省去了RestTemplate的注册
+        List<ItemDTO> items = itemClient.queryItemByIds(itemIds);
+        if (CollUtils.isEmpty(items)) {
+            throw new BadRequestException("购物车中商品不存在！");
         }
         // 3.转为 id 到 item的map
         Map<Long, ItemDTO> itemMap = items.stream().collect(Collectors.toMap(ItemDTO::getId, Function.identity()));
@@ -122,8 +147,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     private void checkCartsFull(Long userId) {
         int count = lambdaQuery().eq(Cart::getUserId, userId).count();
         if (count >= cartProperties.getMaxAmount()) {
-            throw new BizIllegalException(
-                    StrUtil.format("用户购物车课程不能超过{}", cartProperties.getMaxAmount()));
+            throw new BizIllegalException(StrUtil.format("用户购物车课程不能超过{}", cartProperties.getMaxAmount()));
         }
     }
 

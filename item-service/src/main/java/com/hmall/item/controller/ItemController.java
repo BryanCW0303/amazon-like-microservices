@@ -2,12 +2,11 @@ package com.hmall.item.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hmall.api.dto.ItemDTO;
-import com.hmall.api.dto.OrderDetailDTO;
 import com.hmall.common.domain.PageDTO;
 import com.hmall.common.domain.PageQuery;
 import com.hmall.common.utils.BeanUtils;
-
+import com.hmall.item.domain.dto.ItemDTO;
+import com.hmall.item.domain.dto.OrderDetailDTO;
 import com.hmall.item.domain.po.Item;
 import com.hmall.item.service.IItemService;
 import io.swagger.annotations.Api;
@@ -82,4 +81,8 @@ public class ItemController {
     public void deductStock(@RequestBody List<OrderDetailDTO> items){
         itemService.deductStock(items);
     }
+
+    @ApiOperation("批量恢复库存")
+    @PutMapping("/stock/store")
+    public void restoreStock(@RequestBody List<OrderDetailDTO> orderDetailDTOS){itemService.restoreStock(orderDetailDTOS);}
 }

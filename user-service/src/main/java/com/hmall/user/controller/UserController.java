@@ -1,4 +1,5 @@
 package com.hmall.user.controller;
+
 import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.vo.UserLoginVO;
 import com.hmall.user.service.IUserService;
@@ -30,7 +31,7 @@ public class UserController {
             @ApiImplicitParam(name = "amount", value = "支付金额")
     })
     @PutMapping("/money/deduct")
-    public void deductMoney(@RequestParam("pw") String pw, @RequestParam("amount") Integer amount){
+    public void deductMoney(@RequestParam("pw") String pw,@RequestParam("amount") Integer amount){
         userService.deductMoney(pw, amount);
     }
 }

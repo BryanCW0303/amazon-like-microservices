@@ -1,139 +1,21 @@
-11:47:37:517  INFO 109700 --- [main] com.hmall.user.UserApplication           : Starting UserApplication using Java 11.0.27 on BryanR16 with PID 109700 (C:\Users\ncwbr\IdeaProjects\hmall\user-service\target\classes started by ncwbr in C:\Users\ncwbr\IdeaProjects\hmall)
-11:47:37:526 DEBUG 109700 --- [main] com.hmall.user.UserApplication           : Running with Spring Boot v2.7.12, Spring v5.3.27
-11:47:37:526  INFO 109700 --- [main] com.hmall.user.UserApplication           : The following 1 profile is active: "local"
-11:47:38:586 ERROR 109700 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-java.lang.IllegalStateException: Error processing condition on com.hmall.common.config.MyBatisConfig.mybatisPlusInterceptor
-	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:60) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForBeanMethod(ConfigurationClassBeanDefinitionReader.java:193) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:153) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:129) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:343) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:748) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.12.jar:2.7.12]
-	at com.hmall.user.UserApplication.main(UserApplication.java:11) ~[classes/:na]
-Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.hmall.common.config.MqConfig] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:361) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:418) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$getTypeForFactoryMethod$2(AbstractAutowireCapableBeanFactory.java:765) ~[spring-beans-5.3.27.jar:5.3.27]
-	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1705) ~[na:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:764) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:703) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:674) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1684) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:570) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.collectBeanNamesForType(OnBeanCondition.java:246) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getBeanNamesForType(OnBeanCondition.java:239) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getBeanNamesForType(OnBeanCondition.java:229) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getMatchingBeans(OnBeanCondition.java:182) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getMatchOutcome(OnBeanCondition.java:157) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47) ~[spring-boot-autoconfigure-2.7.12.jar:2.7.12]
-	... 17 common frames omitted
-Caused by: java.lang.NoClassDefFoundError: org/springframework/amqp/support/converter/Jackson2JsonMessageConverter
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3166) ~[na:na]
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2309) ~[na:na]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467) ~[spring-core-5.3.27.jar:5.3.27]
-	... 33 common frames omitted
-Caused by: java.lang.ClassNotFoundException: org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581) ~[na:na]
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178) ~[na:na]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:527) ~[na:na]
-	... 37 common frames omitted
-
-11:47:38:589  WARN 109700 --- [main] o.s.boot.SpringApplication               : Unable to close ApplicationContext
-
-java.lang.IllegalStateException: Failed to introspect Class [com.hmall.common.config.MqConfig] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:485) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:361) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:418) ~[spring-core-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$getTypeForFactoryMethod$2(AbstractAutowireCapableBeanFactory.java:765) ~[spring-beans-5.3.27.jar:5.3.27]
-	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1705) ~[na:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:764) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:703) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:674) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1684) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:570) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:669) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:661) ~[spring-beans-5.3.27.jar:5.3.27]
-	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1302) ~[spring-context-5.3.27.jar:5.3.27]
-	at org.springframework.boot.SpringApplication.getExitCodeFromMappedException(SpringApplication.java:864) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.getExitCodeFromException(SpringApplication.java:852) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.handleExitCode(SpringApplication.java:839) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:779) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:317) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.12.jar:2.7.12]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.12.jar:2.7.12]
-	at com.hmall.user.UserApplication.main(UserApplication.java:11) ~[classes/:na]
-Caused by: java.lang.NoClassDefFoundError: org/springframework/amqp/support/converter/Jackson2JsonMessageConverter
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3166) ~[na:na]
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2309) ~[na:na]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:467) ~[spring-core-5.3.27.jar:5.3.27]
-	... 21 common frames omitted
-Caused by: java.lang.ClassNotFoundException: org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581) ~[na:na]
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178) ~[na:na]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:527) ~[na:na]
-	... 25 common frames omitted
-
-11:52:51:425  INFO 110652 --- [main] com.hmall.user.UserApplication           : Starting UserApplication using Java 11.0.27 on BryanR16 with PID 110652 (C:\Users\ncwbr\IdeaProjects\hmall\user-service\target\classes started by ncwbr in C:\Users\ncwbr\IdeaProjects\hmall)
-11:52:51:430 DEBUG 110652 --- [main] com.hmall.user.UserApplication           : Running with Spring Boot v2.7.12, Spring v5.3.27
-11:52:51:431  INFO 110652 --- [main] com.hmall.user.UserApplication           : The following 1 profile is active: "local"
-11:52:52:649  INFO 110652 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=77a6245c-5560-3975-bf3f-8f8d58275804
-11:52:53:029  INFO 110652 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
-11:52:53:039  INFO 110652 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-11:52:53:039  INFO 110652 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
-11:52:53:133  INFO 110652 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-11:52:53:134  INFO 110652 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1655 ms
-11:52:57:044  INFO 110652 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
-11:52:58:108  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [RpcClientFactory] create a new rpc client of 31afaa7d-33c5-4a6c-b583-29c669ca62c3
-11:52:58:156  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 23 ms to scan 1 urls, producing 3 keys and 6 values 
-11:52:58:184  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 9 ms to scan 1 urls, producing 4 keys and 9 values 
-11:52:58:194  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 6 ms to scan 1 urls, producing 3 keys and 10 values 
-11:52:58:196  WARN 110652 --- [main] org.reflections.Reflections              : given scan urls are empty. set urls in the configuration
-11:52:58:202  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 5 ms to scan 1 urls, producing 1 keys and 5 values 
-11:52:58:212  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 7 ms to scan 1 urls, producing 1 keys and 7 values 
-11:52:58:220  INFO 110652 --- [main] org.reflections.Reflections              : Reflections took 6 ms to scan 1 urls, producing 2 keys and 8 values 
-11:52:58:222  WARN 110652 --- [main] org.reflections.Reflections              : given scan urls are empty. set urls in the configuration
-11:52:58:223  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] RpcClient init label, labels = {module=naming, source=sdk}
-11:52:58:225  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.ServerListManager
-11:52:58:225  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
-11:52:58:226  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
-11:52:58:228  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Try to connect to server on start up, server: {serverIp = '192.168.58.128', server main port = 8848}
-11:53:00:601  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Success to connect to server [192.168.58.128:8848] on start up, connectionId = 1756515667296_192.168.58.1_51376
-11:53:00:602  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
-11:53:00:602  INFO 110652 --- [com.alibaba.nacos.client.remote.worker] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Notify connected event to listeners.
-11:53:00:605  INFO 110652 --- [main] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$1013/0x000000084069c840
-11:53:00:724  INFO 110652 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
-11:53:00:738  INFO 110652 --- [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP user-service 10.2.106.195:8084 register finished
-11:53:01:203  INFO 110652 --- [nacos-grpc-client-executor-9] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Receive server push request, request = NotifySubscriberRequest, requestId = 120
-11:53:01:205  INFO 110652 --- [nacos-grpc-client-executor-9] com.alibaba.nacos.common.remote.client   : [31afaa7d-33c5-4a6c-b583-29c669ca62c3] Ack server push request, request = NotifySubscriberRequest, requestId = 120
-11:53:01:271  INFO 110652 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Documentation plugins bootstrapped
-11:53:01:274  INFO 110652 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-11:53:01:297  INFO 110652 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-11:53:01:436  INFO 110652 --- [main] com.hmall.user.UserApplication           : Started UserApplication in 11.345 seconds (JVM running for 12.322)
-12:09:47:385  WARN 110652 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
-12:09:47:385  WARN 110652 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
-12:09:47:390  WARN 110652 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Destruction of the end
-12:09:47:394  WARN 110652 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Destruction of the end
-12:09:48:226  INFO 110652 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registering from Nacos Server now...
-12:09:48:234  INFO 110652 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registration finished.
-12:09:48:563  INFO 110652 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown rpc client, set status to shutdown
-12:09:48:564  INFO 110652 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@1ef37e8[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
-12:09:48:564  INFO 110652 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Close current connection 1756515667296_192.168.58.1_51376
-12:09:48:569  INFO 110652 --- [nacos-grpc-client-executor-236] c.a.n.c.remote.client.grpc.GrpcClient    : [1756515667296_192.168.58.1_51376]Ignore complete event,isRunning:false,isAbandon=false
-12:09:48:573  INFO 110652 --- [SpringApplicationShutdownHook] c.a.n.c.remote.client.grpc.GrpcClient    : Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@722e98bf[Running, pool size = 4, active threads = 0, queued tasks = 0, completed tasks = 237]
+00:01:56:509 ERROR 26840 --- [tableMetaChecker_1_1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/hm-user?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai, jdbcUrl : jdbc:mysql://localhost:3306/hm-user?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai, lastPacketReceivedIdleMillis : 119960
+00:03:56:510 ERROR 26840 --- [tableMetaChecker_1_1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/hm-user?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai, jdbcUrl : jdbc:mysql://localhost:3306/hm-user?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai, lastPacketReceivedIdleMillis : 119987
+00:06:53:160  WARN 26840 --- [Thread-5] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
+00:06:53:161  WARN 26840 --- [Thread-1] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
+00:06:53:162  WARN 26840 --- [Thread-5] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Destruction of the end
+00:06:53:170  WARN 26840 --- [Thread-1] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Destruction of the end
+00:06:54:737  INFO 26840 --- [SpringContextShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registering from Nacos Server now...
+00:06:54:744  INFO 26840 --- [SpringContextShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registration finished.
+00:06:55:087  INFO 26840 --- [SpringContextShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown rpc client, set status to shutdown
+00:06:55:088  INFO 26840 --- [SpringContextShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@6c6a9ad1[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+00:06:55:089  INFO 26840 --- [SpringContextShutdownHook] com.alibaba.nacos.common.remote.client   : Close current connection 1728832226817_127.0.0.1_65500
+00:06:55:093  INFO 26840 --- [nacos-grpc-client-executor-2250] c.a.n.c.remote.client.grpc.GrpcClient    : [1728832226817_127.0.0.1_65500]Ignore complete event,isRunning:false,isAbandon=false
+00:06:55:097  INFO 26840 --- [SpringContextShutdownHook] c.a.n.c.remote.client.grpc.GrpcClient    : Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@18310c37[Running, pool size = 4, active threads = 0, queued tasks = 0, completed tasks = 2251]
+00:06:55:152  INFO 26840 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+00:06:55:172  INFO 26840 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+00:06:55:186  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.c.r.n.AbstractNettyRemotingClient    : channel inactive: [id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]
+00:06:55:191  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.c.r.netty.NettyClientChannelManager  : return to pool, rm channel:[id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]
+00:06:55:192  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.core.rpc.netty.NettyPoolableFactory  : channel valid false,channel:[id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]
+00:06:55:194  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.core.rpc.netty.NettyPoolableFactory  : will destroy channel:[id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]
+00:06:55:196  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.c.r.n.AbstractNettyRemotingClient    : ChannelHandlerContext(AbstractNettyRemotingClient$ClientHandler#0, [id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]) will closed
+00:06:55:196  INFO 26840 --- [NettyClientSelector_RMROLE_1_1] i.s.c.r.n.AbstractNettyRemotingClient    : ChannelHandlerContext(AbstractNettyRemotingClient$ClientHandler#0, [id: 0x3cb16f0f, L:/26.10.64.202:65426 ! R:/26.10.64.202:8099]) will closed

@@ -25,12 +25,13 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
 
     @Override
     public void deductStock(List<OrderDetailDTO> items) {
-        String sqlStatement = "com.hmall.mapper.ItemMapper.updateStock";
+        String sqlStatement = "com.hmall.item.mapper.ItemMapper.updateStock";
         boolean r = false;
         try {
             r = executeBatch(items, (sqlSession, entity) -> sqlSession.update(sqlStatement, entity));
         } catch (Exception e) {
-            throw new BizIllegalException("更新库存异常，可能是库存不足!", e);
+            log.error("更新库存异常", e);
+            return;
         }
         if (!r) {
             throw new BizIllegalException("库存不足！");

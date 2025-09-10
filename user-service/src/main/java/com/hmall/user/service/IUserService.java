@@ -5,7 +5,6 @@ import com.hmall.user.domain.dto.LoginFormDTO;
 import com.hmall.user.domain.po.User;
 import com.hmall.user.domain.vo.UserLoginVO;
 
-
 /**
  * <p>
  * 用户表 服务类

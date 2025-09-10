@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hmall.cart.domain.po.Cart;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
-
 /**
  * <p>
  * 订单详情表 Mapper 接口

@@ -2,12 +2,10 @@ package com.hmall.pay.controller;
 
 import com.hmall.api.dto.PayOrderDTO;
 import com.hmall.common.exception.BizIllegalException;
-
 import com.hmall.common.utils.BeanUtils;
 import com.hmall.pay.domain.dto.PayApplyDTO;
 import com.hmall.pay.domain.dto.PayOrderFormDTO;
 import com.hmall.pay.domain.po.PayOrder;
-import com.hmall.pay.domain.vo.PayOrderVO;
 import com.hmall.pay.enums.PayType;
 import com.hmall.pay.service.IPayOrderService;
 import io.swagger.annotations.Api;
@@ -16,8 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Api(tags = "支付相关接口")
 @RestController
 @RequestMapping("pay-orders")
@@ -25,12 +21,6 @@ import java.util.List;
 public class PayController {
 
     private final IPayOrderService payOrderService;
-
-    @ApiOperation("查询支付单")
-    @GetMapping
-    public List<PayOrderVO> queryPayOrders(){
-        return BeanUtils.copyList(payOrderService.list(), PayOrderVO.class);
-    }
 
     @ApiOperation("生成支付单")
     @PostMapping
@@ -49,11 +39,31 @@ public class PayController {
         payOrderFormDTO.setId(id);
         payOrderService.tryPayOrderByBalance(payOrderFormDTO);
     }
-
     @ApiOperation("根据id查询支付单")
     @GetMapping("/biz/{id}")
     public PayOrderDTO queryPayOrderByBizOrderNo(@PathVariable("id") Long id){
         PayOrder payOrder = payOrderService.lambdaQuery().eq(PayOrder::getBizOrderNo, id).one();
         return BeanUtils.copyBean(payOrder, PayOrderDTO.class);
     }
+
+    /**
+     * 修改支付单状态
+     *
+     * @param orderId
+     */
+    @ApiOperation("修改支付单状态")
+    @PutMapping("/status/{orderId}/{status}")
+    void updatePayOrderStatusByOrderId(@PathVariable Long orderId, @PathVariable Integer status) {
+        payOrderService.lambdaUpdate()
+                .set(PayOrder::getStatus, status)
+                .eq(PayOrder::getBizOrderNo, orderId)
+                .update();
+    }
+
+    /*// 方便接口测试
+    @ApiOperation("查询支付单")
+    @GetMapping
+    public List<PayOrderVO> queryPayOrders(){
+        return BeanUtils.copyList(payOrderService.list(), PayOrderVO.class);
+    }*/
 }

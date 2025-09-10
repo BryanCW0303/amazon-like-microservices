@@ -38,8 +38,8 @@ public class OrderDelayMessageListener {
         if(payOrder != null && payOrder.getStatus() == 3){
             // 4.1.已支付，标记订单状态为已支付
             orderService.markOrderPaySuccess(orderId);
-        } else {
-            // TODO 4.2.未支付，取消订单，回复库存
+        }else{
+            // 4.2.未支付，取消订单，回复库存
             orderService.cancelOrder(orderId);
         }
     }

@@ -14,11 +14,11 @@ import com.hmall.pay.domain.po.PayOrder;
 import com.hmall.pay.enums.PayStatus;
 import com.hmall.pay.mapper.PayOrderMapper;
 import com.hmall.pay.service.IPayOrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -30,15 +30,20 @@ import java.time.LocalDateTime;
  * @author 虎哥
  * @since 2023-05-16
  */
-@Slf4j
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> implements IPayOrderService {
 
+    //private final IUserService userService;
+    // 使用FeignClient简化
     private final UserClient userClient;
 
+    //private final IOrderService orderService;
+    // 使用FeignClient简化
     private final TradeClient tradeClient;
 
+    // 消息队列优化
     private final RabbitTemplate rabbitTemplate;
 
     @Override
@@ -50,7 +55,8 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
     }
 
     @Override
-    @Transactional
+    //@Transactional
+    @GlobalTransactional
     public void tryPayOrderByBalance(PayOrderFormDTO payOrderFormDTO) {
         // 1.查询支付单
         PayOrder po = getById(payOrderFormDTO.getId());
@@ -67,8 +73,17 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
             throw new BizIllegalException("交易已支付或关闭！");
         }
         // 5.修改订单状态
+        /*Order order = new Order();
+        order.setId(po.getBizOrderNo());
+        order.setStatus(2);
+        order.setPayTime(LocalDateTime.now());
+        orderService.updateById(order);*/
+        // 使用FeignClient简化
+        /*tradeClient.markOrderPaySuccess(po.getBizOrderNo());*/
+        // 消息队列优化
+        // 注释以下内容验证延迟消息
         try {
-            rabbitTemplate.convertAndSend("pay.direct", "pay.success", po.getBizOrderNo());
+            rabbitTemplate.convertAndSend("pay.topic", "pay.success", po.getBizOrderNo());
         } catch (Exception e) {
             log.error("支付成功的消息发送失败，支付单id：{}， 交易单id：{}", po.getId(), po.getBizOrderNo(), e);
         }

@@ -16,8 +16,7 @@ public class HelloController {
     private final Map<String, AtomicInteger> countMap = new HashMap<>();
 
     @GetMapping
-    public String hello(HttpServletRequest request) throws InterruptedException {
-        Thread.sleep(300);
+    public String hello(HttpServletRequest request){
         String ip = request.getRemoteAddr();
         AtomicInteger ai = countMap.get(ip);
         if (ai == null) {
